@@ -1,3 +1,5 @@
+Nie wiem czemu ale zarzadzanie cssem i JSami mnie przeroslo. Np jquery widzialem w przegladarce ze sie ladowalo. A nic z jquery nie dzialalo. Z 2 godziny szukalem rozwiazania, niby znalazlem obejscie ale nie rozwiazanie wiec dlatego tyle tego zincludowanego w projekcie z cdnow.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
