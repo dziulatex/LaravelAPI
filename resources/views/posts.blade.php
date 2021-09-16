@@ -25,6 +25,10 @@
 
 
 ?>
+<h1> Most active users for 7d:</h1>
+<div>
+    <canvas id="7dActivity"></canvas>
+</div>
 <div class="modal" id="userAdditional" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -122,6 +126,53 @@
     </ul>
 </div>
 <script>
+    axios.post('/getMostActiveUsers')
+        .then(function (response) {
+            let usernames = response.data.map(a => a.username);
+            let total = response.data.map(a => a.total);
+            var ctx = document.getElementById('7dActivity');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: usernames,
+                    datasets: [{
+
+                        data: total,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    events: ['click','mousemove','mouseout'],
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        })
     var user;
     var userBasic;
     axios.post('/getPosts')
@@ -130,7 +181,7 @@
                 pageLength: 50,
                 data: response.data,
                 columns: [
-                    {'data': 'userId'},
+                    {'data': 'username'},
                     {'data': 'title'},
                     {'data': 'body'},
 
@@ -138,6 +189,7 @@
                 "columnDefs": [
                     {className: "user", "targets": [0]}
                 ]
+
             });
         })
 
@@ -154,11 +206,12 @@
                         id: $(this).text()
                     }
             }).then(function (response) {
+
                 userBasic=response.data;
-                $('#userDiv .name').text(response.data.name);
-                $('#userDiv .username').text(response.data.username);
-                $('#userDiv .email').text(response.data.email);
-                $('#userDiv .phone_number').text(response.data.phone_number);
+                $('#userDiv .nameModal').text(response.data.name);
+                $('#userDiv .usernameModal').text(response.data.username);
+                $('#userDiv .emailModal').text(response.data.email);
+                $('#userDiv .phone_numberModal').text(response.data.phone_number);
             })
         }
         $('#userDiv').css('top',pageY);
@@ -208,16 +261,16 @@
                     id: $(this).text()
                 }
         }).then(function (response) {
-            alert(JSON.stringify(response.data));
-
             $('#companyInfoModal .companyName').text(response.data.companyName);
             $('#companyInfoModal .catchPhrase').text(response.data.catchPhrase);
             $('#companyInfoModal .short').text(response.data.short);
-
         })
 
         user=$(this).text();
     });
 
-</script>
 
+
+
+
+</script>

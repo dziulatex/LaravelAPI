@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\Users;
 class UserController extends Controller
 {
-    public function index(Request $request)
-    {
-        dd($request->all());
-    }
+
     public function getUserBasic(Request $request)
     {
         $id=($request->all())['id'];
@@ -27,5 +24,10 @@ class UserController extends Controller
         $id=($request->all())['id'];
         $user=Users::getUserCompany($id);
         return $user;
+    }
+    public function getMostActiveUsers(Request $request)
+    {
+        $users=Users::getMostActiveUsers();
+        return $users;
     }
 }

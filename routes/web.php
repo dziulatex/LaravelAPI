@@ -30,5 +30,6 @@ Route::post('/getPosts', [PostsController::class, 'getPosts']);
 Route::post('/getUserBasic', [UserController::class, 'getUserBasic']);
 Route::post('/getUserAdditional', [UserController::class, 'getUserAdditional']);
 Route::post('/getUserCompany', [UserController::class, 'getUserCompany']);
+Route::post('/getMostActiveUsers', [UserController::class, 'getMostActiveUsers']);
 ?>
 
